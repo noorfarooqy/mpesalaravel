@@ -1,0 +1,31 @@
+{
+    "name": "noorfarooqy/easy_notifications",
+    "description": "Send Email and SMS notifications",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Noorfarooqy\\EasyNotifications\\": "src/",
+            "Noorfarooqy\\EasyNotifications\\Controllers\\": "app/Controllers",
+            "Noorfarooqy\\EasyNotifications\\Services\\": "app/Services"
+        }
+    },
+    "authors": [
+        {
+            "name": "noorfarooqy",
+            "email": "noor@drongo.vip"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "laravel/framework": "^10.10",
+        "noorfarooqy/noorauth": "^1.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Noorfarooqy\\EasyNotifications\\EasyNotificationsServiceProvider"
+            ]
+        }
+    }
+}
