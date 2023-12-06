@@ -7,6 +7,7 @@ use Noorfarooqy\MpesaLaravel\Helpers\ErrorCodes;
 use Noorfarooqy\MpesaLaravel\Jobs\SendEasyNotificationSmsJob;
 use Noorfarooqy\MpesaLaravel\Services\CustomerAccount;
 use Noorfarooqy\MpesaLaravel\Services\CustomerToBusiness;
+use Noorfarooqy\MpesaLaravel\Services\CustomerToBusinessContract;
 
 trait HasCustomerToBusiness
 {
@@ -45,18 +46,16 @@ trait HasCustomerToBusiness
             $error_code = ErrorCodes::$INVALID_ACCOUNT_CODE;
             $error_message = ErrorCodes::$INVALID_ACCOUNT_DESC;
             SendEasyNotificationSmsJob::dispatch((string)$transaction->{'MSISDN'}, $sms_message);
-        } else {
-            $this->transaction = $transaction;
-            $account = $this->extraAccountValidation();
-            if (!$account) {
-                $error_code = ErrorCodes::$NON_EXISTANT_ACCOUNT_CODE;;
-                $error_message = ErrorCodes::$INVALID_ACCOUNT_DESC;
-                $sms_message = "Dear client, the account number or name you've entered does not exist. Kindly ensure the account number and retry";
-                SendEasyNotificationSmsJob::dispatch((string)$transaction->{'MSISDN'}, $sms_message);
-                // $account = null;
-            }
         }
-
+        $this->transaction = $transaction;
+        $account = $this->extraAccountValidation();
+        if (!$account) {
+            $error_code = ErrorCodes::$NON_EXISTANT_ACCOUNT_CODE;;
+            $error_message = ErrorCodes::$INVALID_ACCOUNT_DESC;
+            $sms_message = "Dear client, the account number or name you've entered does not exist. Kindly ensure the account number and retry";
+            SendEasyNotificationSmsJob::dispatch((string)$transaction->{'MSISDN'}, $sms_message);
+            // $account = null;
+        }
         $validation_data = [
             'customer_account' => $account?->id,
             'trn_party_trn_id' => $this->third_pary_id,
