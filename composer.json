@@ -3,17 +3,18 @@
     "description": "Mpesa G2 Laravel Package",
     "type": "library",
     "require-dev": {
-        "laravel/laravel": "^10.2"
+        "laravel/framework": "^10.2"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
             "Noorfarooqy\\MpesaLaravel\\": "src/",
-            "Noorfarooqy\\MpesaLaravel\\Http\\Controllers\\": "app/Http/Controllers",
+            "Noorfarooqy\\MpesaLaravel\\Controllers\\": "app/Http/Controllers",
             "Noorfarooqy\\MpesaLaravel\\Services\\": "app/Services",
             "Noorfarooqy\\MpesaLaravel\\Middleware\\": "app/Middleware",
             "Noorfarooqy\\MpesaLaravel\\Helpers\\": "app/Helpers",
-            "Noorfarooqy\\MpesaLaravel\\Jobs\\": "app/Jobs"
+            "Noorfarooqy\\MpesaLaravel\\Jobs\\": "app/Jobs",
+            "Noorfarooqy\\MpesaLaravel\\Traits\\": "app/Traits"
         }
     },
     "authors": [
@@ -25,7 +26,13 @@
     "minimum-stability": "stable",
     "require": {
         "noorfarooqy/noorauth": "^1.0",
-        "noorfarooqy/flexcube": "^1.0",
         "noorfarooqy/easy_notifications": "^1.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Noorfarooqy\\MpesaLaravel\\MpesaLaravelServiceProvider"
+            ]
+        }
     }
 }

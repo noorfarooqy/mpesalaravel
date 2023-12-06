@@ -11,4 +11,5 @@ class CustomerToBusiness extends Model
     use HasFactory;
 
     public $guarded = [];
+    protected $table = "mp_customer_to_business";
 }

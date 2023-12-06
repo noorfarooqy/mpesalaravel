@@ -1,6 +1,6 @@
 <?php
 
-namespace Noorfarooqy\EasyNotifications\Jobs;
+namespace Noorfarooqy\MpesaLaravel\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;

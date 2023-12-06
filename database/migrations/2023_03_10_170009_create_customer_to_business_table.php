@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('customer_to_business', function (Blueprint $table) {
+        Schema::create('mp_customer_to_business', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_account')->references('id')->on('customer_accounts');
+            $table->foreignId('customer_account')->nullable()->references('id')->on('mp_customer_accounts');
             $table->uuid('trn_party_trn_id')->unique();
             $table->string('trn_type')->default('PayBill');
             $table->string('trn_id')->unique();

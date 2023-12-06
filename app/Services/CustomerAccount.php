@@ -10,4 +10,6 @@ class CustomerAccount extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $table = "mp_customer_accounts";
 }
