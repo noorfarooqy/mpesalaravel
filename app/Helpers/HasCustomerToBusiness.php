@@ -45,16 +45,19 @@ trait HasCustomerToBusiness
             $sms_message = "Dear client, the account number you've entered is not a valid account number. Kindly ensure the account number and retry";
             $error_code = ErrorCodes::$INVALID_ACCOUNT_CODE;
             $error_message = ErrorCodes::$INVALID_ACCOUNT_DESC;
-            SendEasyNotificationSmsJob::dispatch((string)$transaction->{'MSISDN'}, $sms_message);
+            SendEasyNotificationSmsJob::dispatch((string)$transaction->{'MSISDN'}, $sms_message . " - $account ");
+            return $this->ctobValidationResponse($this->third_pary_id, $error_code, $error_message . " - $account ");
         }
         $this->transaction = $transaction;
         $account = $this->extraAccountValidation();
         if (!$account) {
             $error_code = ErrorCodes::$NON_EXISTANT_ACCOUNT_CODE;;
             $error_message = ErrorCodes::$INVALID_ACCOUNT_DESC;
-            $sms_message = "Dear client, the account number or name you've entered does not exist. Kindly ensure the account number and retry";
+            $account = $transaction->{'BillRefNumber'};
+            $sms_message = "Dear client, the account number $account or name you've entered does not exist. Kindly ensure the account number and retry";
             SendEasyNotificationSmsJob::dispatch((string)$transaction->{'MSISDN'}, $sms_message);
             // $account = null;
+            return $this->ctobValidationResponse($this->third_pary_id, $error_code, $error_message . " - $account ");
         }
         $validation_data = [
             'customer_account' => $account?->id,
@@ -126,7 +129,7 @@ trait HasCustomerToBusiness
             $error_message = ErrorCodes::$UNVALIDATED_CONFIRMATION_ERROR_DESC;
             return $this->ctobConfirmationResponse($transaction_details['transaction_party_id'], $error_message);
         }
-        if ($transaction?->is_confirmed || $transaction?->confirmed_at) {
+        if ($transaction?->is_confirmed == 1 || $transaction?->confirmed_at != null) {
             $error_message = ErrorCodes::$DUPLICATED_CONFIRMATION_DESC;
             return $this->ctobConfirmationResponse($transaction_details['transaction_party_id'], $error_message);
         }
@@ -190,6 +193,7 @@ trait HasCustomerToBusiness
 
     public function extraAccountValidation()
     {
+        Log::info('Default validation');
         $account = CustomerAccount::where('account_number', $this->transaction->{'BillRefNumber'})
             ->orWhere('short_name', $this->transaction->{'BillRefNumber'})->get()->first();
 

@@ -35,6 +35,7 @@ return new class extends Migration
             $table->timestamp('validated_at')->nullable();
             $table->boolean('is_confirmed')->default(false);
             $table->timestamp('confirmed_at')->nullable();
+            $table->boolean('post_confirmation_status')->default(false);
             $table->timestamps();
         });
     }
