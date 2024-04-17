@@ -3,10 +3,10 @@
     "description": "Customized Authentication using laravel jetstream and fortify",
     "type": "library",
     "require": {
-        "laravel/jetstream": "^4.0",
-        "laravel/framework": "^10.29",
-        "laravel/sanctum": "^3.3",
-        "spatie/laravel-permission": "^6.0"
+        "laravel/jetstream": "^4.0|^5.0",
+        "laravel/framework": "^10.29||^11.0",
+        "laravel/sanctum": "^3.3|^4.0",
+        "spatie/laravel-permission": "^6.4"
     },
     "license": "MIT",
     "autoload": {
@@ -15,7 +15,10 @@
             "Noorfarooqy\\NoorAuth\\Http\\Controllers\\": "app/Http/Controllers",
             "Noorfarooqy\\NoorAuth\\Services\\": "app/Services",
             "Noorfarooqy\\NoorAuth\\Traits\\": "app/Traits",
-            "Noorfarooqy\\NoorAuth\\Interfaces\\": "app/Interfaces"
+            "Noorfarooqy\\NoorAuth\\Interfaces\\": "app/Interfaces",
+            "Noorfarooqy\\NoorAuth\\Commands\\": "app/Commands",
+            "Noorfarooqy\\NoorAuth\\Events\\": "app/Events",
+            "Noorfarooqy\\NoorAuth\\Middleware\\": "app/Middleware"
         }
     },
     "authors": [

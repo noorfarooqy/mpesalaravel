@@ -25,4 +25,13 @@ return [
             ],
         ],
     ],
+    'africastalking' => [
+        'api_host' => env('AT_API_HOST', 'api.africastalking.com'),
+        'api_url' => env('AT_URL', 'https://api.africastalking.com/version1'),
+        'auth_endpoint' => '/auth-token/generate',
+        'sms_endpoint' => '/version1/messaging',
+        'api_key' => env('AT_API_KEY'),
+        'username' => env('AT_USERNAME', 'sandbox'),
+
+    ]
 ];

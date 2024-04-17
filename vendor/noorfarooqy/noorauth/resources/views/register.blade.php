@@ -25,7 +25,7 @@
         <div class="w-px-400 mx-auto">
             <!-- Logo -->
             <div class="app-brand mb-4">
-                <a href="{{ route(config('noor-auth.default_route')) }}" class="app-brand-link gap-2">
+                <a href="{{ route(config('noorauth.default_route')) }}" class="app-brand-link gap-2">
                     <span class="app-brand-logo demo">
                         <svg width="32" height="22" viewBox="0 0 32 22" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +47,7 @@
             <h3 class="mb-1">Adventure starts here 🚀</h3>
             <p class="mb-4">Make your app management easy and fun!</p>
 
-            <form id="formAuthentication" class="mb-3" action="{{ route(config('noor-auth.default_route')) }}"
+            <form id="formAuthentication" class="mb-3" action="{{ route(config('noorauth.default_route')) }}"
                 method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>

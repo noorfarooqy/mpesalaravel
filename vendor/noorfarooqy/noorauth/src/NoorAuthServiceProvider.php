@@ -3,6 +3,8 @@
 namespace Noorfarooqy\NoorAuth;
 
 use Illuminate\Support\ServiceProvider;
+use Noorfarooqy\NoorAuth\Commands\NoorPermissions;
+use Noorfarooqy\NoorAuth\Services\UserValidationMiddleware;
 
 class NoorAuthServiceProvider extends ServiceProvider
 {
@@ -20,12 +22,18 @@ class NoorAuthServiceProvider extends ServiceProvider
         ], 'noorauth-errors');
 
         $this->publishes([
-            __DIR__ . '/../config/noor-auth.php' => config_path('noor-auth.php'),
+            __DIR__ . '/../config/noorauth.php' => config_path('noorauth.php'),
         ], 'noorauth-config');
 
         $this->publishes([
             __DIR__ . '/../database/migrations/' => database_path('migrations/'),
-        ], 'noorauth-database');
+        ], 'noorauth-migrations');
+
+        $this->commands([
+            NoorPermissions::class,
+        ]);
+        $router = $this->app['router'];
+        $router->aliasMiddleware('is_system', UserValidationMiddleware::class);
     }
     public function register()
     {
