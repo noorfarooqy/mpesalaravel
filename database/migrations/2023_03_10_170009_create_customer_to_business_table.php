@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('trn_id')->unique();
             $table->string('trn_fcc_ref')->nullable();
             $table->unsignedBigInteger('trn_time');
-            $table->unsignedFloat('trn_amount');
+            $table->float('trn_amount');
             $table->string('trn_bill_ref');
             $table->string('trn_invoice_number')->nullable();
-            $table->unsignedFloat('trn_org_balance')->nullable();
+            $table->float('trn_org_balance')->nullable();
             $table->string('trn_msisdn');
             $table->string('trn_kyc_fn')->nullable();
             $table->string('trn_kyc_mn')->nullable();
