@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_accounts');
+        Schema::dropIfExists('mp_customer_accounts');
     }
 };
